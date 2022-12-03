@@ -7,8 +7,6 @@
 
 import Combine
 
-#warning("make remote package!")
-
 @MainActor
 public protocol ViewModel: ObservableObject where ObservableObjectPublisher == Self.ObjectWillChangePublisher {
     var subscriptions: Set<AnyCancellable> { get set }
