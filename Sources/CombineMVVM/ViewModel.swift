@@ -6,7 +6,6 @@
 //
 
 import Combine
-import Foundation
 
 @MainActor
 public protocol ViewModel: ObservableObject where ObservableObjectPublisher == Self.ObjectWillChangePublisher {
