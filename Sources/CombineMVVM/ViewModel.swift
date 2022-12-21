@@ -20,8 +20,6 @@ public extension ViewModel where ObservableObjectPublisher == Self.ObjectWillCha
         observable.objectWillChange
             .sink { _ in
                 self.objectWillChange.send()
-            } receiveValue: { _ in
-                self.objectWillChange.send()
             }
             .store(in: &subscriptions)
     }
