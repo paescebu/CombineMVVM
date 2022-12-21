@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 @MainActor
 public protocol ViewModel: ObservableObject where ObservableObjectPublisher == Self.ObjectWillChangePublisher {
@@ -18,6 +19,7 @@ public protocol ViewModel: ObservableObject where ObservableObjectPublisher == S
 public extension ViewModel where ObservableObjectPublisher == Self.ObjectWillChangePublisher {
     func pipeUpdates<Observable: ObservableObject>(of observable: Observable) where ObservableObjectPublisher == Observable.ObjectWillChangePublisher {
         observable.objectWillChange
+            .receive(on: DispatchQueue.main)
             .sink { _ in
                 self.objectWillChange.send()
             }
