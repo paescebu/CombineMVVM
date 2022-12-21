@@ -6,8 +6,7 @@
 //
 
 import Combine
-
-#warning("make remote package!")
+import Foundation
 
 @MainActor
 public protocol ViewModel: ObservableObject where ObservableObjectPublisher == Self.ObjectWillChangePublisher {
@@ -19,10 +18,13 @@ public protocol ViewModel: ObservableObject where ObservableObjectPublisher == S
 
 public extension ViewModel where ObservableObjectPublisher == Self.ObjectWillChangePublisher {
     func pipeUpdates<Observable: ObservableObject>(of observable: Observable) where ObservableObjectPublisher == Observable.ObjectWillChangePublisher {
-        observable.objectWillChange.sink { _ in
-            self.objectWillChange.send()
-        } receiveValue: { _ in }
-        .store(in: &subscriptions)
+        observable.objectWillChange
+            .sink { _ in
+                self.objectWillChange.send()
+            } receiveValue: { _ in
+                self.objectWillChange.send()
+            }
+            .store(in: &subscriptions)
     }
     
     func pipeViewModelUpdates(of viewModel: some ViewModel) {
