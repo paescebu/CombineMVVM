@@ -40,7 +40,7 @@ class SecondViewModel: ViewModel {
 }
 ```
 
-# Donations
+## Donations
 
 You really don't have to pay anything to use this package. But if you feel generous today and would like to donate because this package helped you so much, here's a PayPal donation link: https://www.paypal.com/donate/?hosted_button_id=JYL8DBGA2X4YQ
 
